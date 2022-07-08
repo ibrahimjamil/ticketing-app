@@ -1,6 +1,9 @@
+require('custom-env').env(true);
+require('dotenv').config();
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import { noAuthRoutes } from './routes';
 
 class Server {
     private app: express.Application
@@ -18,8 +21,8 @@ class Server {
         this.app.use(cors());
     }
     public routes(){
-        this.app.get('/api/users',(req, res)=>{
-            res.send('ok')
+        noAuthRoutes.forEach((route) => {
+            this.app.use(`/api${route.path}`, route.action);
         })
     }
     public cronScheduler() {

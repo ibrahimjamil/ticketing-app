@@ -18,6 +18,9 @@ class Server {
         this.app.use(cors());
     }
     public routes(){
+        this.app.get('/api/users',(req, res)=>{
+            res.send('ok')
+        })
     }
     public cronScheduler() {
         

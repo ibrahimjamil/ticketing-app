@@ -18,7 +18,6 @@ class Server {
         this.app.use(cors());
     }
     public routes(){
-        
     }
     public cronScheduler() {
         

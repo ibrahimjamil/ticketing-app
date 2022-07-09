@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { DatabaseError } from "../errors/databaseError";
-import { SchemaValidationError } from "../errors/schemaValidationError";
+import { CustomAbstractClass } from "../errors/customAbstractError";
 
 export const errorHandler = (
     error: Error,
@@ -11,18 +10,10 @@ export const errorHandler = (
     if (res.headersSent) {
         return next();
     }
-    if (error instanceof SchemaValidationError){
-        res.status(400).send({
-            message: "schema validation error occurred"
-        })
-    }
-    else if(error instanceof DatabaseError){
-        res.status(500).send({
-            message: "DB issue"
-        })
-    }else{
-        res.status(400).send({
+    if (error instanceof CustomAbstractClass) return res.status(error.statusCode).send({error: error.serializeErrors()})
+    res.status(400).send({
+        error:[{
             message: "something went wrong"
-        })
-    }
+        }]
+    })
 }

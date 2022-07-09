@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { noAuthRoutes } from './routes';
 import { errorHandler } from './middlewares/errorHandler';
+import { NotFoundError } from './errors/notFoundError';
 
 class Server {
     private app: express.Application
@@ -12,6 +13,7 @@ class Server {
         this.app = express();
         this.configuration();
         this.routes();
+        this.unexpectedRouteHandler();
         this.cronScheduler();
         this.app.use(errorHandler);
     }
@@ -25,6 +27,11 @@ class Server {
     public routes(){
         noAuthRoutes.forEach((route) => {
             this.app.use(`/api${route.path}`, route.action);
+        })
+    }
+    public unexpectedRouteHandler() {
+        this.app.all("*",()=>{
+            throw new NotFoundError();
         })
     }
     public cronScheduler() {

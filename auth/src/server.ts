@@ -4,6 +4,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import { noAuthRoutes } from './routes';
+import { errorHandler } from './middlewares/errorHandler';
 
 class Server {
     private app: express.Application
@@ -12,6 +13,7 @@ class Server {
         this.configuration();
         this.routes();
         this.cronScheduler();
+        this.app.use(errorHandler);
     }
 
     public configuration() {

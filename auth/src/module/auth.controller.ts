@@ -1,6 +1,7 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { userSignInSchema, userSignUpSchema } from './auth.type';
 import AuthService from './auth.service';
+import { SchemaValidationError } from '../errors/schemaValidationError';
 
 export class AuthController {
   public router: Router;
@@ -51,14 +52,11 @@ export class AuthController {
         });
       }
     } else {
-      res.status(400).send({
-        error: true,
-        message: 'schema validation error',
-      });
+     return next(new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0])));
     }
   }
 
-  public signIn = async (req: Request, res: Response) => {
+  public signIn = async (req: Request, res: Response, next: NextFunction) => {
     const body = {
       email: req.body.email,
       password: req.body.password,
@@ -86,10 +84,7 @@ export class AuthController {
         });
       }
     } else {
-      res.status(400).send({
-        error: true,
-        message: 'schema validation error',
-      });
+      return next(new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0])));
     }
   }
 

@@ -1,6 +1,7 @@
 require('custom-env').env(true);
 require('dotenv').config();
 import express from 'express';
+require('express-async-errors');
 import morgan from 'morgan';
 import cors from 'cors';
 import { noAuthRoutes } from './routes';
@@ -30,7 +31,7 @@ class Server {
         })
     }
     public unexpectedRouteHandler() {
-        this.app.all("*",()=>{
+        this.app.all("*", async ()=>{
             throw new NotFoundError();
         })
     }

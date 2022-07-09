@@ -52,7 +52,7 @@ export class AuthController {
         });
       }
     } else {
-     return next(new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0])));
+     throw new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0]));
     }
   }
 
@@ -84,7 +84,7 @@ export class AuthController {
         });
       }
     } else {
-      return next(new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0])));
+      throw new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0]));
     }
   }
 

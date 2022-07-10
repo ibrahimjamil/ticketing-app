@@ -5,29 +5,29 @@ Note: you must have aws account to configure this project according to your need
 
 # Tech Stack
 
-Typescript
-ReactJS
-NextJS
-NodeJS
-Nats streaming
-MongoDB
-Redis
-sockets.io
-webRTC
-Docker
-Kubernetes
-scaffold (just for auto checking yaml file to apply)
+Typescript <br />
+ReactJS <br />
+NextJS <br />
+NodeJS <br />
+Nats streaming <br />
+MongoDB <br />
+Redis <br />
+sockets.io <br />
+webRTC <br />
+Docker <br />
+Kubernetes <br />
+scaffold (just for auto checking yaml file to apply) <br />
 
 # aws-services
 1- aws-cognito
 
 Note: 
-1- its purelly based on microservices architecture so basic understanding is necessary
-2- proper error handling is necessary so we confidure that also 
-3- proper typescript should be use
+1- its purelly based on microservices architecture so basic understanding is necessary <br />
+2- proper error handling is necessary so we confidure that also  <br />
+3- proper typescript should be use <br />
 
 # stating guide
-as for now we only run on docker so you just have to install docker and 
-kubernetes on your machine and should have scaffold to run this command
+as for now we only run on docker so you just have to install docker and <br />
+kubernetes on your machine and should have scaffold to run this command <br />
 sckaffold dev to run all deployments and services on docker
 

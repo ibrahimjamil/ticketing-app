@@ -4,6 +4,7 @@ import express from 'express';
 require('express-async-errors');
 import morgan from 'morgan';
 import cors from 'cors';
+import mongoose from 'mongoose';
 import { noAuthRoutes } from './routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { NotFoundError } from './errors/notFoundError';
@@ -38,7 +39,13 @@ class Server {
     public cronScheduler() {
         
     }
-    public start(){
+    public async start(){
+        try {
+            await  mongoose.connect('mongodb://auth-mongo-srv:27017/auth');
+            console.log("connected to mongoDB")
+        } catch (error: any) {
+            console.error(error.message)
+        }
         this.app.listen(this.app.get('port'), () => {
             console.log(`Server is listening on ${this.app.get('port')} port.`);
         });

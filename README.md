@@ -21,7 +21,7 @@ scaffold (just for auto checking yaml file to apply) <br />
 # aws-services
 1- aws-cognito
 
-Note: 
+Note: <br />
 1- its purelly based on microservices architecture so basic understanding is necessary <br />
 2- proper error handling is necessary so we confidure that also  <br />
 3- proper typescript should be use <br />

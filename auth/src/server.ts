@@ -4,10 +4,12 @@ import express from 'express';
 require('express-async-errors');
 import morgan from 'morgan';
 import cors from 'cors';
+import cookieSession from 'cookie-session';
 import mongoose from 'mongoose';
 import { noAuthRoutes } from './routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { NotFoundError } from './errors/notFoundError';
+import appConfig from './config/appConfig';
 
 class Server {
     private app: express.Application
@@ -21,7 +23,19 @@ class Server {
     }
 
     public configuration() {
+        //coming from secret key we added in pod by kubectl command and include in kubernetes file 
+        if (!appConfig.SESSION_SECRET_KEY) {
+            throw new Error('Session secret key must be defined');
+        }
+        this.app.set('trust proxy', true)
         this.app.use(express.json());
+        this.app.use(cookieSession({
+            signed: true,
+            secure: true,
+            keys: [appConfig.SESSION_SECRET_KEY],
+            secret: appConfig.SESSION_SECRET_KEY,
+            maxAge: 24 * 60 * 60 * 1000 // 24 hours
+        }))
         this.app.use(morgan('dev'));
         this.app.set('port', 3000);
         this.app.use(cors());

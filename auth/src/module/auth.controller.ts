@@ -2,6 +2,9 @@ import { Router, Request, Response, NextFunction } from 'express';
 import { userSignInSchema, userSignUpSchema } from './auth.type';
 import AuthService from './auth.service';
 import { SchemaValidationError } from '../errors/schemaValidationError';
+import { User } from '../model/user';
+import { DatabaseError } from '../errors/databaseError';
+import { EmailExistError } from '../errors/emailAlreadyExist';
 
 export class AuthController {
   public router: Router;
@@ -24,32 +27,20 @@ export class AuthController {
         if (!data.error) {
           if (!!data?.UserConfirmed && !!data?.UserSub) {
             try {
-              // await this.userService.addUser({
-              //   email,
-              //   type: userType,
-              //   name,
-              //   companyName,
-              //   industryNumber,
-              // })
+              const user = User.build({
+                email: email
+              })
+              await user.save();
               next();
             } catch (error: any) {
-              res.status(500).json({
-                error: true,
-                message: error.message,
-              })
+              throw new DatabaseError();
             }
           }
         } else {
-          res.status(403).json({
-            error: true,
-            ...data,
-          })
+          throw new EmailExistError();
         }
       } catch (error: any) {
-        res.status(500).json({
-          error: true,
-          message: error.message,
-        });
+        throw new EmailExistError();
       }
     } else {
      throw new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0]));
@@ -67,21 +58,19 @@ export class AuthController {
       try {
         const data: any = await this.authService.signInUser(email, password)
         if (!data.error) {
+          req.session = {
+            accessToken: data.AuthenticationResult.AccessToken,
+            idToken: data.AuthenticationResult.IdToken
+          }
           res.status(200).json({
             error: false,
             ...data,
           })
         } else {
-          res.status(403).json({
-            error: true,
-            ...data,
-          })
+          throw new DatabaseError();
         }
       } catch (error: any) {
-        res.status(500).json({
-          error: true,
-          message: error.message,
-        });
+        throw new DatabaseError();
       }
     } else {
       throw new SchemaValidationError(schemaValidation.error.errors.map((error) => error.path[0]));

@@ -3,10 +3,12 @@ import mongoose from "mongoose";
 // interface for user Attribute to pass into
 interface UserAttr {
     email: string;
+    userType: string;
 }
 // an interface to describe what user should return 
 interface UserDoc extends mongoose.Document {
     email: string;
+    userType: string;
 }
 // an interface to describe what properties userModel should have or to embed into model 
 interface UserModel extends mongoose.Model<UserDoc>{
@@ -15,6 +17,10 @@ interface UserModel extends mongoose.Model<UserDoc>{
 
 const userSchema = new mongoose.Schema({
     email: {
+        type: String,
+        required: true,
+    },
+    userType: {
         type: String,
         required: true,
     }

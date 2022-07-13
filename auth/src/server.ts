@@ -6,7 +6,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import cookieSession from 'cookie-session';
 import mongoose from 'mongoose';
-import { noAuthRoutes } from './routes';
+import { AppRoutes, noAuthRoutes } from './routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { NotFoundError } from './errors/notFoundError';
 import appConfig from './config/appConfig';
@@ -41,6 +41,9 @@ class Server {
         this.app.use(cors());
     }
     public routes(){
+        AppRoutes.forEach((route) => {
+            this.app.use(`/api${route.path}`, route.middleware, route.action);
+        });
         noAuthRoutes.forEach((route) => {
             this.app.use(`/api${route.path}`, route.action);
         })

@@ -1,3 +1,4 @@
+import { setUpPem, verifyAccessToken, verifyIdToken } from "../middlewares/authMiddleware";
 import { AuthController } from "../module/auth.controller";
 
 export const noAuthRoutes = [
@@ -6,4 +7,12 @@ export const noAuthRoutes = [
       action: new AuthController().routes()
     },
   ];
+
+export const AppRoutes = [
+  {
+    path: '/users/getUser',
+    middleware: [setUpPem, verifyAccessToken, verifyIdToken],
+    action: new AuthController().routes()
+  },
+];
   

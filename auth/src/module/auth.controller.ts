@@ -5,6 +5,7 @@ import { SchemaValidationError } from '../errors/schemaValidationError';
 import { User } from '../model/user';
 import { DatabaseError } from '../errors/databaseError';
 import { EmailExistError } from '../errors/emailAlreadyExist';
+import { setUpPem, verifyAccessToken, verifyIdToken } from '../middlewares/authMiddleware';
 
 export class AuthController {
   public router: Router;
@@ -78,7 +79,20 @@ export class AuthController {
   }
 
   public getUser = async (req: Request, res: Response) => {
-    
+    if (req.user.email) {
+      const user = await User.findOne({
+        email: req.user.email
+      })
+      res.status(200).send({
+        error: false,
+        ...user,
+      });
+    } else {
+      res.status(402).send({
+        error: false,
+        message: 'user did not find from DB',
+      });
+    }
   }
 
   public signOut = async (req: Request, res: Response) => {
@@ -89,7 +103,7 @@ export class AuthController {
     this.router.post('/signup', this.signUp, this.signIn);
     this.router.post('/signin', this.signIn);
     this.router.post('/signout', this.getUser);
-    this.router.get('/currentuser', this.getUser);
+    this.router.get('/', this.getUser);
     return this.router;
   }
 }

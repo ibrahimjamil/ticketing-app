@@ -94,14 +94,9 @@ export class AuthController {
     }
   }
 
-  public signOut = async (req: Request, res: Response) => {
-    
-  }
-
   public routes() {
     this.router.post('/signup', this.signUp, this.signIn);
     this.router.post('/signin', this.signIn);
-    this.router.post('/signout', this.getUser);
     this.router.get('/', this.getUser);
     return this.router;
   }

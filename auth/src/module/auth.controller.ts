@@ -28,7 +28,8 @@ export class AuthController {
           if (!!data?.UserConfirmed && !!data?.UserSub) {
             try {
               const user = User.build({
-                email: email
+                email: email,
+                userType: userType
               })
               await user.save();
               next();

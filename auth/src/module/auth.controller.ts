@@ -5,7 +5,6 @@ import { SchemaValidationError } from '../errors/schemaValidationError';
 import { User } from '../model/user';
 import { DatabaseError } from '../errors/databaseError';
 import { EmailExistError } from '../errors/emailAlreadyExist';
-import { setUpPem, verifyAccessToken, verifyIdToken } from '../middlewares/authMiddleware';
 
 export class AuthController {
   public router: Router;

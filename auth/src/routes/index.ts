@@ -10,9 +10,9 @@ export const noAuthRoutes = [
 
 export const AppRoutes = [
   {
-    path: '/users/getUser',
+    path: '/users/protected/getUser',
     middleware: [setUpPem, verifyAccessToken, verifyIdToken],
     action: new AuthController().routes()
-  },
+  }
 ];
   

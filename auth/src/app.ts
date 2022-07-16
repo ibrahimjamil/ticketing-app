@@ -9,6 +9,7 @@ import { AppRoutes, noAuthRoutes } from './routes';
 import { errorHandler } from './middlewares/errorHandler';
 import { NotFoundError } from './errors/notFoundError';
 import appConfig from './config/appConfig';
+import { User } from './model/user';
 
 class Server {
     private app: express.Application
@@ -41,7 +42,7 @@ class Server {
         this.app.set('port', 3000);
         this.app.use(cors());
     }
-    public routes(){
+    public async routes(){
         AppRoutes.forEach((route) => {
             this.app.use(`/api${route.path}`, route.middleware, route.action);
         });

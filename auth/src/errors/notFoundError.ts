@@ -12,6 +12,7 @@ export class NotFoundError extends CustomAbstractClass {
 
     serializeErrors(){
         return [{
+            error: true,
             message: this.reason
         }]
     }

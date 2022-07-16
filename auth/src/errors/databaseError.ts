@@ -11,6 +11,7 @@ export class DatabaseError extends CustomAbstractClass {
 
     serializeErrors(){
         return [{
+            error: true,
             message: this.reason
         }]
     }

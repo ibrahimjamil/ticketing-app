@@ -7,6 +7,7 @@ interface UserAttr {
 }
 // an interface to describe what user should return 
 interface UserDoc extends mongoose.Document {
+    id: string;
     email: string;
     userType: string;
 }
@@ -23,14 +24,6 @@ const userSchema = new mongoose.Schema({
     userType: {
         type: String,
         required: true,
-    }
-},{
-    toJSON:{
-        transform(doc, ret){
-            ret.id = ret._id
-            delete ret._id
-            delete ret.__v
-        }
     }
 })
 

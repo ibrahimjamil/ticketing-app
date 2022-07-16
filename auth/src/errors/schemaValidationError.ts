@@ -11,6 +11,8 @@ export class SchemaValidationError extends CustomAbstractClass {
     serializeErrors(){
         return  this.error.map((field) => {
             return {
+                error: true,
+                zodError: true,
                 field: field ? field : undefined,
                 message: `field of ${field} is missing or misaligned`
             }

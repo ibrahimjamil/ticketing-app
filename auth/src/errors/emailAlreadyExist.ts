@@ -11,6 +11,7 @@ export class EmailExistError extends CustomAbstractClass {
 
     serializeErrors(){
         return [{
+            error: true,
             message: this.reason
         }]
     }

@@ -82,7 +82,7 @@ export class AuthController {
     if (req.user.email) {
       const user = await User.findOne({
         email: req.user.email
-      })
+      }).lean()
       res.status(200).send({
         error: false,
         ...user,

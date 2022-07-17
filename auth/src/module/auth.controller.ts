@@ -1,10 +1,8 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import { userSignInSchema, userSignUpSchema } from './auth.type';
-import AuthService from './auth.service';
-import { SchemaValidationError } from '../errors/schemaValidationError';
 import { User } from '../model/user';
-import { DatabaseError } from '../errors/databaseError';
-import { EmailExistError } from '../errors/emailAlreadyExist';
+import AuthService from './auth.service';
+import { userSignInSchema, userSignUpSchema } from './auth.type';
+import { SchemaValidationError, DatabaseError, EmailExistError } from '@ibrahimticketing/common';
 
 export class AuthController {
   public router: Router;

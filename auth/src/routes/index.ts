@@ -1,4 +1,5 @@
-import { setUpPem, verifyAccessToken, verifyIdToken } from "../middlewares/authMiddleware";
+import { verifyAccessToken, verifyIdToken } from "@ibrahimticketing/common";
+import { setUpPem } from "../middlewares/authMiddleware";
 import { AuthController } from "../module/auth.controller";
 
 export const noAuthRoutes = [

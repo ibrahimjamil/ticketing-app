@@ -6,10 +6,8 @@ import morgan from 'morgan';
 import cors from 'cors';
 import cookieSession from 'cookie-session';
 import { AppRoutes, noAuthRoutes } from './routes';
-import { errorHandler } from './middlewares/errorHandler';
-import { NotFoundError } from './errors/notFoundError';
+import { NotFoundError, errorHandler } from '@ibrahimticketing/common';
 import appConfig from './config/appConfig';
-import { User } from './model/user';
 
 class Server {
     private app: express.Application

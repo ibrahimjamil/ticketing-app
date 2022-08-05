@@ -16,12 +16,8 @@ spec:
       - name: auth
         image: ibrahimjamil/auth
         env:
-          - name: SESSION_SECRET_KEY
-            valueFrom:
-              secretKeyRef:
-                name: session-secret
-                key: SESSION_SECRET_KEY
-
+          - name: MONGO_URI
+            value: 'mongodb://auth-mongo-srv:27017/auth'
 ---
 apiVersion: v1
 kind: Service

@@ -1,0 +1,8 @@
+export default {
+    AWS_REGION: process.env.AWS_REGION,
+    AWS_COGNITO_SECRET_HASH: process.env.AWS_COGNITO_SECRET_HASH,
+    AWS_COGNITO_CLIENT_ID: process.env.AWS_COGNITO_CLIENT_ID,
+    AWS_COGNITO_USER_POOL_ID: process.env.AWS_COGNITO_USER_POOL_ID,
+    SESSION_SECRET_KEY: process.env.SESSION_SECRET_KEY
+  };
+  

@@ -167,7 +167,7 @@ const Login = () => {
             weight={700}
             className={classes.ticketingTitle}
           >
-            Merchflow
+            Ticketing
           </Text>
         </Grid.Col>
         <Grid.Col span={12} className={classes.signInTitleContainer}>

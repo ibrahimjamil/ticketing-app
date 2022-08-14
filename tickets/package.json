@@ -8,6 +8,8 @@
     "test": "NODE_ENV=test jest --watchAll --no-cache"
   },
   "jest": {
+    "verbose": true,
+    "testTimeout": 5000,
     "preset": "ts-jest",
     "testEnvironment": "node",
     "setupFilesAfterEnv": [

@@ -1,0 +1,11 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mongo-persistent-volume-claim
+spec:
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: hostpath
+  accessModes:
+    - ReadWriteOnce

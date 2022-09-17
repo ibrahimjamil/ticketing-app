@@ -22,6 +22,7 @@ export class AuthController {
       userAttr.push({ Name: 'custom:userType', Value: userType });
       try {
         const data: any = await this.authService.signUpUser(email, password, userAttr)
+        console.log("data",data);
         if (!data.error) {
           if (!!data?.UserConfirmed && !!data?.UserSub) {
             try {

@@ -12,8 +12,6 @@ NodeJS <br />
 Nats streaming <br />
 MongoDB <br />
 Redis <br />
-sockets.io <br />
-webRTC <br />
 Docker <br />
 Kubernetes <br />
 scaffold (just for auto checking yaml file to apply) <br />
